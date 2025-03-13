@@ -8,6 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -37,5 +39,9 @@ public class ProductService {
             productsPage.hasNext(),
             productsPage.hasPrevious()
     );
+  }
+
+  public Optional<Product> getProductByCode(String code) {
+    return productRepository.findByCode(code).map(ProductMapper::toProduct);
   }
 }
